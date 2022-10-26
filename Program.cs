@@ -13,6 +13,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+var connectionString2 = builder.Configuration.GetConnectionString("reversiDb");
+builder.Services.AddDbContext<ReversiDbContext>(options =>
+    options.UseSqlServer(connectionString2));
 
 var app = builder.Build();
 
