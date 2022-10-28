@@ -11,7 +11,7 @@ using ReversiMvcApp.Data;
 namespace ReversiMvcApp.Migrations
 {
     [DbContext(typeof(ReversiDbContext))]
-    [Migration("20221025142615_InitialCreate")]
+    [Migration("20221027113236_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,6 +22,39 @@ namespace ReversiMvcApp.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("ReversiMvcApp.Models.Spel", b =>
+                {
+                    b.Property<int>("Token")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Token"), 1L, 1);
+
+                    b.Property<int>("AanDeBeurt")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Omschrijving")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Speler1Naam")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Speler1Token")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Speler2Naam")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Speler2Token")
+                        .HasColumnType("int");
+
+                    b.HasKey("Token");
+
+                    b.ToTable("Spel");
+                });
 
             modelBuilder.Entity("ReversiMvcApp.Models.Speler", b =>
                 {
